@@ -23,10 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
-.env
-.env.local
-.env.production
+
 
 # Old files
 README.md.txt
