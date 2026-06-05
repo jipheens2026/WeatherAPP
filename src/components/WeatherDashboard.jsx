@@ -26,7 +26,12 @@ const WeatherDashboard = () => {
       const data = await weatherAPI.getWeather(lat, lon, 7, 'metric');
       setWeatherData(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch weather data. Please check your API key.');
+      const status = err.response?.status;
+      const serverMessage = err.response?.data?.message || err.response?.statusText;
+      const message = serverMessage
+        ? `Weather API error ${status}: ${serverMessage}`
+        : err.message || 'Failed to fetch weather data. Please check your API key and redeploy when updated.';
+      setError(message);
       console.error('Weather fetch error:', err);
     } finally {
       setLoading(false);

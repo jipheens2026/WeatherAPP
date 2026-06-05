@@ -131,6 +131,7 @@ The optimized production build will be in the `dist/` folder.
 3. **Configure Environment Variables**:
    - Go to Netlify Dashboard → Site Settings → Environment Variables
    - Add `VITE_WEATHER_AI_API_KEY` with your API key
+   - If the site was already deployed, trigger a new deploy after saving this variable
 
 ### Deploy to Vercel
 

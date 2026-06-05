@@ -74,7 +74,12 @@ const TreeAnalysis = () => {
       const data = await weatherAPI.analyzeTreesImage(formDataToSend);
       setResult(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to analyze image. Please check your API key and try again.');
+      const status = err.response?.status;
+      const serverMessage = err.response?.data?.message || err.response?.statusText;
+      const message = serverMessage
+        ? `Tree analysis API error ${status}: ${serverMessage}`
+        : err.message || 'Failed to analyze image. Please check your API key and try again.';
+      setError(message);
       console.error('Tree analysis error:', err);
     } finally {
       setLoading(false);
