@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.DEV
+const isLocalHost = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const useDirectApi = import.meta.env.DEV || isLocalHost;
+const API_BASE_URL = useDirectApi
   ? 'https://api.weather-ai.co/v1'
   : '/.netlify/functions/weather-ai';
 const API_KEY = import.meta.env.VITE_WEATHER_AI_API_KEY;
@@ -13,7 +15,7 @@ if (!API_KEY) {
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  headers: import.meta.env.DEV
+  headers: useDirectApi
     ? { Authorization: `Bearer ${API_KEY}` }
     : {},
 });
@@ -22,7 +24,7 @@ const buildEndpoint = (path) => {
   if (import.meta.env.DEV) {
     return path;
   }
-  return `/?path=${encodeURIComponent(path)}`;
+  return `?path=${encodeURIComponent(path)}`;
 };
 
 const ensureApiKey = () => {
