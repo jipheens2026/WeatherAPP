@@ -133,6 +133,8 @@ The optimized production build will be in the `dist/` folder.
    - Add `VITE_WEATHER_AI_API_KEY` with your API key
    - If the site was already deployed, trigger a new deploy after saving this variable
 
+> Note: In production, the app uses a Netlify serverless proxy to forward requests to Weather-AI and avoid browser network/CORS failures.
+
 ### Deploy to Vercel
 
 1. **Install Vercel CLI**:
